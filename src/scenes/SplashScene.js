@@ -21,7 +21,7 @@ export default class SplashScene extends Component {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: colors.prima,
+          backgroundColor: colors.primaryBlue,
         }}
       >
         <Image
