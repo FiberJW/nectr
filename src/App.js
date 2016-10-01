@@ -5,40 +5,19 @@ import {
   View,
 } from 'react-native';
 
+import ExNavigator from '@exponent/react-native-navigator';
+import Router from './routes';
+
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <ExNavigator
+        initialRoute={Router.getSplashRoute()}
+        style={{ flex: 1 }}
+        showNavigationBar={false}
+        ref={(nav) => { this.navigator = nav; }}
+        style={{ flex: 1 }}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
