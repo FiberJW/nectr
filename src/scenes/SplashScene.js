@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  StatusBar,
 } from 'react-native';
 
 import Router from '../routes/';
@@ -24,6 +25,7 @@ export default class SplashScene extends Component {
           backgroundColor: colors.primaryBlue,
         }}
       >
+        <StatusBar backgroundColor="transparent" translucent />
         <Image
           source={require('nectr/src/images/nectr_text.png')}
           style={{

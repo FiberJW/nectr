@@ -5,6 +5,7 @@ import {
   Dimensions,
   ToolbarAndroid,
   StyleSheet,
+  StatusBar,
 } from 'react-native';
 
 import colors from '../config/colors.js';
@@ -29,9 +30,11 @@ export default class HomeScene extends Component {
       <View
         style={{
           flex: 1,
+          paddingTop: StatusBar.currentHeight,
           backgroundColor: '#ffffff',
         }}
       >
+        <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
         <ToolbarAndroid
           navIcon={require('nectr/src/images/menu_icon.png')}
           title="Feed"
