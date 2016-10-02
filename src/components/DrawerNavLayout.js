@@ -34,7 +34,6 @@ export default class HomeScene extends Component {
   render() {
     const routes = [
       {title: 'Home', sceneId: 'home'},
-      {title: 'Search', sceneId: 'search'},
       {title: 'About', sceneId: 'about'},
     ];
 

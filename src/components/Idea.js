@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 2,
     paddingHorizontal: 15,
-    paddingTop: 15,
+    paddingVertical: 15,
     backgroundColor: '#ffffff',
     width: Dimensions.get('window').width - 20,
   },
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginLeft: 70,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   meta: {
     marginLeft: 15,
@@ -68,9 +68,6 @@ export default class Idea extends Component {
       liked: false,
     };
   }
-  onPress = () => {
-    this.props.navigator.push(router.getIdeaRoute(this.props.ideaData))
-  }
   onHeartPress = () => {
     this.props.firebaseIdeasRef.child(this.props.ideaKey).update({ liked: !this.state.liked });
   }
@@ -84,8 +81,8 @@ export default class Idea extends Component {
     this.setState({ liked: this.props.ideaData.liked });
   }
   render() {
+    console.log(this.props.ideaData.content);
     return (
-      <TouchableOpacity onPress={this.onPress}>
         <View style={styles.container} elevation={4}>
           <View style={styles.contentContainer}>
             <Image
@@ -101,35 +98,31 @@ export default class Idea extends Component {
                   {moment.utc(this.props.ideaData.createdAt).fromNow()}
                 </Text>
               </View>
-              <Text style={styles.content}>
-                {`${this.props.ideaData.content.substr(0, 80)}${this.props.ideaData.content.length > 80 ? '...' : ''}`}
-              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text style={styles.content}>
+                  {`${this.props.ideaData.content.substr(0, 80)}${this.props.ideaData.content.length > 80 ? '...' : ''}`}
+                </Text>
+                <TouchableOpacity
+                  onPress={this.onHeartPress}
+                >
+                  <Image
+                    style={{
+                      height: 24,
+                      width: 24,
+                    }}
+                    source={this.state.liked ? require('nectr/src/images/favorite_icon_solid.png') : require('nectr/src/images/favorite_icon_border.png')}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <View style={styles.actionRow}>
-            <TouchableOpacity>
-              <Image
-                style={{
-                  height: 20,
-                  width: 24,
-                }}
-                source={require('nectr/src/images/reply_icon.png')}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.onHeartPress}
-            >
-              <Image
-                style={{
-                  height: 24,
-                  width: 24,
-                }}
-                source={this.state.liked ? require('nectr/src/images/favorite_icon_solid.png') : require('nectr/src/images/favorite_icon_border.png')}
-              />
-            </TouchableOpacity>
-          </View>
         </View>
-      </TouchableOpacity>
     )
   }
 }
