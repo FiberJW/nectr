@@ -12,6 +12,7 @@ import {
   SplashScene,
   HomeScene,
   SearchScene,
+  AboutScene,
 } from 'scenes';
 import Transitions from '../lib/transitions';
 
@@ -47,6 +48,19 @@ const Router = {
         return <SearchScene navigator={navigator} />;
       },
       configureScene() {
+        return {
+          ...Transitions.NONE,
+        };
+      },
+    };
+  },
+  getAboutRoute() {
+    return {
+      id: 'about',
+      renderScene(navigator) {
+        return <AboutScene navigator={navigator} />;
+      },
+            configureScene() {
         return {
           ...Transitions.NONE,
         };
