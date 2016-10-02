@@ -6,6 +6,7 @@ export default {
       splash: Router.getSplashRoute,
       home: Router.getHomeRoute,
       search: Router.getSearchRoute,
+      about: Router.getAboutRoute,
     }[id];
   },
 };

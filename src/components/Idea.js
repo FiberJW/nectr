@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-
+import router from '../routes';
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
@@ -58,9 +58,13 @@ const styles = StyleSheet.create({
 });
 
 export default class Idea extends Component {
+  onPress = () => {
+    this.props.navigator.push(router.getIdeaRoute(this.props.ideaData))
+  }
   render() {
-    return (
-      <View style={styles.container} elevation={6}>
+    return ( 
+      <TouchableOpacity onPress={this.onPress}>   
+         <View style={styles.container} elevation={6}>
         <View style={styles.contentContainer}>
           <Image
             source={{ uri: this.props.profileImageUrl }}
@@ -100,7 +104,7 @@ export default class Idea extends Component {
             />
           </TouchableOpacity>
         </View>
-      </View>
+      </View></TouchableOpacity>
     )
   }
 }

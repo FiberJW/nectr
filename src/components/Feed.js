@@ -79,7 +79,7 @@ export default class Feed extends Component {
           alignItems: 'center',
         }}
         dataSource={this.state.dataSource}
-        renderRow={(data) => <Idea {...data} />}
+        renderRow={(data) => <Idea navigator={this.props.navigator} {...data} ideaData={data}/>}
       />
     );
   }

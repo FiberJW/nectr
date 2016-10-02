@@ -13,7 +13,7 @@ export default class HomeScene extends Component {
   render() {
     return (
       <DrawerNavLayout navigator={this.props.navigator} title="Home" sceneId="home">
-        <Feed />
+        <Feed navigator={this.props.navigator} />
         <IdeaButton
           onPress={this.onIdeaButtonPress}
           icon={require('nectr/src/images/add_icon_white.png')}
