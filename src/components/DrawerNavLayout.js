@@ -62,6 +62,7 @@ export default class HomeScene extends Component {
           drawerPosition={DrawerLayoutAndroid.positions.Left}
           renderNavigationView={() =>
             <DrawerNavView
+              firebaseIdeasRef={this.props.firebaseIdeasRef}
               navigator={this.props.navigator}
               sceneId={this.props.sceneId}
               toggleDrawer={this.toggleDrawer}

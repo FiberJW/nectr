@@ -12,7 +12,7 @@ import colors from '../config/colors.js';
 export default class SplashScene extends Component {
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigator.push(Router.getHomeRoute());
+      this.props.navigator.push(Router.getHomeRoute(this.props.firebaseIdeasRef));
     }, 1000);
   }
   render() {

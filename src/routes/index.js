@@ -16,22 +16,22 @@ import {
 import Transitions from '../lib/transitions';
 
 const Router = {
-  getSplashRoute() {
+  getSplashRoute(firebaseIdeasRef) {
     return {
       id: 'splash',
       renderScene(navigator) {
-        return <SplashScene navigator={navigator} />;
+        return <SplashScene firebaseIdeasRef={firebaseIdeasRef} navigator={navigator} />;
       },
       onDidFocus() {
         // Orientation.lockToPortrait();
       },
     };
   },
-  getHomeRoute() {
+  getHomeRoute(firebaseIdeasRef) {
     return {
       id: 'home',
       renderScene(navigator) {
-        return <HomeScene navigator={navigator} />;
+        return <HomeScene firebaseIdeasRef={firebaseIdeasRef} navigator={navigator} />;
       },
       configureScene() {
         return {
@@ -40,11 +40,11 @@ const Router = {
       },
     };
   },
-  getSearchRoute() {
+  getSearchRoute(firebaseIdeasRef) {
     return {
       id: 'search',
       renderScene(navigator) {
-        return <SearchScene navigator={navigator} />;
+        return <SearchScene firebaseIdeasRef={firebaseIdeasRef} navigator={navigator} />;
       },
       configureScene() {
         return {
@@ -53,11 +53,11 @@ const Router = {
       },
     };
   },
-  getCreateIdeaRoute() {
+  getCreateIdeaRoute(firebaseIdeasRef) {
     return {
       id: 'create_idea',
       renderScene(navigator) {
-        return <CreateIdeaScene navigator={navigator} />;
+        return <CreateIdeaScene firebaseIdeasRef={firebaseIdeasRef} navigator={navigator} />;
       },
     };
   },

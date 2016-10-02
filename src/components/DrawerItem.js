@@ -28,8 +28,8 @@ export default class DrawerItem extends Component {
   onPress = () => {
     this.props.toggleDrawer();
     setTimeout(() => {
-      this.props.navigator.replace(helpers.getRouteById(this.props.sceneId)());
-    }, 150);
+      this.props.navigator.replace(helpers.getRouteById(this.props.sceneId)(this.props.firebaseIdeasRef));
+    }, 50);
   }
   render() {
     return (

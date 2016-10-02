@@ -41,31 +41,34 @@ export default class IdeaScene extends Component {
       <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
       <ToolbarAndroid
         navIcon={require('nectr/src/images/arrow_back_icon_white.png')}
-          title={this.props.title}
-          elevation={6}
-          titleColor="#ffffff"
-          onIconClicked={() => this.props.navigator.pop()}
-          style={styles.toolbar}
-        />
-        <View
-        	style={{
-        		flex:2,
+        title={this.props.title}
+        elevation={6}
+        titleColor="#ffffff"
+        onIconClicked={() => this.props.navigator.pop()}
+        style={styles.toolbar}
+      />
+      <View
+        style={{
+          flex:2,
         }}
-        >
+      >
         <Image
-      	    style={{width:100, height:100}}
+          style={{width:100, height:100}}
       		source={{uri: this.props.idea.profileImageUrl}}
-      	/>
-      	</View>
-      	<View
-      		style={{
-      			flex:3,
+        />
+      </View>
+      <View
+        style={{
+          flex:3,
       	}}
       	>
       	<Text style={{fontWeight: 'bold'}}>
       		{this.props.idea.author}
       	</Text>
-      	</View>
+        <Text style={{fontSize: 24}}>
+      		{this.props.idea.content}
+      	</Text>
+      </View>
     </View>
     );
   }

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import {
   View,
   Text,
   StatusBar,
+  TouchableOpacity,
+  Image,
   ToolbarAndroid,
   TextInput,
   Dimensions,
@@ -17,7 +20,6 @@ const styles = StyleSheet.create({
   toolbar: {
     backgroundColor: colors.primaryBlue,
     height: 56,
-    borderWidth: 1,
   },
 });
 
@@ -26,24 +28,49 @@ export default class CreateIdeaScene extends Component {
     super();
 
     this.state = {
-      ideaContent: 'What\'s your big idea?',
+      ideaContent: 'What\'s your BIG IDEA?',
       ideaCategory: 'tech',
-      ideaLocation: '',
     };
+  }
+  _onActionSelected = (position) => {
+    if (position === 0) {
+      const newChildRef = this.props.firebaseIdeasRef.push();
+      newChildRef.set({
+        author: 'User Jones',
+        content: this.state.ideaContent,
+        category: this.state.ideaCategory,
+        createdAt: moment.utc().toJSON(),
+        liked: false,
+        profileImageUrl: `https://unsplash.it/200?random=${Math.random()}`,
+      });
+      this.props.navigator.pop();
+    }
   }
   render() {
     return (
       <View
+        behavior="padding"
         style={{
           flex: 1,
           paddingTop: StatusBar.currentHeight,
+          justifyContent: 'flex-start',
           backgroundColor: '#F5F5F5',
         }}
       >
         <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
         <ToolbarAndroid
+          title="Post to nectr"
+          titleColor="white"
           navIcon={require('nectr/src/images/close_icon_white.png')}
           elevation={6}
+          onActionSelected={this._onActionSelected}
+          actions={[
+            {
+              title: 'POST',
+              show: 'always',
+              icon: require('nectr/src/images/send_icon_white.png'),
+            },
+          ]}
           onIconClicked={() => this.props.navigator.pop()}
           style={styles.toolbar}
         />

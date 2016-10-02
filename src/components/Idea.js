@@ -7,7 +7,10 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+
 import router from '../routes';
+import moment from 'moment';
+
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
@@ -58,29 +61,48 @@ const styles = StyleSheet.create({
 });
 
 export default class Idea extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      liked: false,
+    };
+  }
   onPress = () => {
     this.props.navigator.push(router.getIdeaRoute(this.props.ideaData))
+  }
+  onHeartPress = () => {
+    this.props.firebaseIdeasRef.child(this.props.ideaKey).update({ liked: !this.state.liked });
+  }
+  componentWillMount = () => {
+    const self = this;
+    this.props.firebaseIdeasRef.child(this.props.ideaKey).on("value", function(snapshot) {
+      self.setState({ liked: snapshot.val().liked });
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+    this.setState({ liked: this.props.ideaData.liked });
   }
   render() {
     return (
       <TouchableOpacity onPress={this.onPress}>
-        <View style={styles.container} elevation={6}>
+        <View style={styles.container} elevation={4}>
           <View style={styles.contentContainer}>
             <Image
-              source={{ uri: this.props.profileImageUrl }}
+              source={{ uri: this.props.ideaData.profileImageUrl }}
               style={styles.profileImage}
             />
             <View style={styles.textContainer}>
               <View style={styles.meta}>
                 <Text style={styles.author}>
-                  {this.props.author}
+                  {this.props.ideaData.author}
                 </Text>
                 <Text style={styles.timeCreated}>
-                  {this.props.timeCreated}
+                  {moment.utc(this.props.ideaData.createdAt).fromNow()}
                 </Text>
               </View>
               <Text style={styles.content}>
-                {`${this.props.content.substr(0, 80)}${this.props.content.length > 80 ? '...' : ''}`}
+                {`${this.props.ideaData.content.substr(0, 80)}${this.props.ideaData.content.length > 80 ? '...' : ''}`}
               </Text>
             </View>
           </View>
@@ -88,19 +110,21 @@ export default class Idea extends Component {
             <TouchableOpacity>
               <Image
                 style={{
-                  height: 28,
-                  width: 28,
+                  height: 20,
+                  width: 24,
                 }}
                 source={require('nectr/src/images/reply_icon.png')}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.onHeartPress}
+            >
               <Image
                 style={{
                   height: 24,
                   width: 24,
                 }}
-                source={require('nectr/src/images/favorite_icon_border.png')}
+                source={this.state.liked ? require('nectr/src/images/favorite_icon_solid.png') : require('nectr/src/images/favorite_icon_border.png')}
               />
             </TouchableOpacity>
           </View>
