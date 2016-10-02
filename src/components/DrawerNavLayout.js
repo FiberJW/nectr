@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   toolbar: {
     backgroundColor: colors.primaryBlue,
     height: 56,
-    borderColor: 'red',
     borderWidth: 1,
   },
 });
@@ -34,7 +33,7 @@ export default class HomeScene extends Component {
   }
   render() {
     const routes = [
-      {title: 'Feed', sceneId: 'home'},
+      {title: 'Home', sceneId: 'home'},
       {title: 'Search', sceneId: 'search'},
     ];
 

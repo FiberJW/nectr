@@ -3,16 +3,14 @@
  */
 
 import React from 'react';
-import {
-  Platform,
-  Navigator,
-} from 'react-native';
 
 import {
   SplashScene,
   HomeScene,
   SearchScene,
+  CreateIdeaScene,
 } from 'scenes';
+
 import Transitions from '../lib/transitions';
 
 const Router = {
@@ -52,6 +50,14 @@ const Router = {
         };
       },
     };
+  },
+  getCreateIdeaRoute() {
+    return {
+      id: 'create_idea',
+      renderScene(navigator) {
+        return <CreateIdeaScene navigator={navigator} />
+      }
+    }
   },
 };
 

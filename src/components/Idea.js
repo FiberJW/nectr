@@ -76,7 +76,7 @@ export default class Idea extends Component {
               </Text>
             </View>
             <Text style={styles.content}>
-              {this.props.content}
+              {`${this.props.content.substr(0, 80)}${this.props.content.length > 80 ? '...' : ''}`}
             </Text>
           </View>
         </View>
@@ -88,16 +88,6 @@ export default class Idea extends Component {
                 width: 28,
               }}
               source={require('nectr/src/images/reply_icon.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={{
-                padding: 5,
-                height: 342 / 14.25,
-                width: 324 / 14.25,
-              }}
-              source={require('nectr/src/images/nectr_icon.png')}
             />
           </TouchableOpacity>
           <TouchableOpacity>
