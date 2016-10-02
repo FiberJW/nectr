@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, ListView, StyleSheet, Text } from 'react-native';
-import Row from '../components/Row';
+import Idea from '../components/Idea';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,29 +8,70 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   seperator: {
-    
+
   },
 });
 
-class ListViewDemo extends React.Component {
+export default class Feed extends Component {
   constructor(props) {
     super(props);
-
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', 'kevin likes small peepee'],),
+      dataSource: ds.cloneWithRows([
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+        {
+          author: 'Juwan Wheatley',
+          content: 'I have an Idea for an app for app ideas',
+        },
+      ]),
     };
   }
   render() {
     return (
       <ListView
         style={styles.container}
+        contentContainerStyle={{
+          alignItems: 'center',
+        }}
         dataSource={this.state.dataSource}
-        renderRow={(data) => <View><Text>{data}</Text></View>}
-        renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.seperator} />}
+        renderRow={(data) => <Idea {...data} />}
+        // renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.seperator} />}
       />
     );
   }
 }
-
-export default ListViewDemo;

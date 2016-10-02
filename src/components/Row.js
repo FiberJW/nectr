@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     marginLeft: 12,
@@ -21,9 +20,11 @@ const styles = StyleSheet.create({
 
 const Row = (props) => (
   <View style={styles.container}>
-    <Image source={{ uri: props.picture.large}} style={styles.photo} />
     <Text style={styles.text}>
-      {`${props.name.first} ${props.name.last}`}
+      {props.author}
+    </Text>
+    <Text style={styles.text}>
+      {props.content}
     </Text>
   </View>
 );

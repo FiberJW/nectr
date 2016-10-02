@@ -33,12 +33,17 @@ export default class HomeScene extends Component {
     this.state.drawerOpen ? this._drawer.closeDrawer() : this._drawer.openDrawer();
   }
   render() {
+    const routes = [
+      {title: 'Feed', sceneId: 'home'},
+      {title: 'Search', sceneId: 'search'},
+    ];
+
     return (
       <View
         style={{
           flex: 1,
           paddingTop: StatusBar.currentHeight,
-          backgroundColor: '#ffffff',
+          backgroundColor: '#F5F5F5',
         }}
       >
         <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
@@ -55,7 +60,14 @@ export default class HomeScene extends Component {
           ref={(c) => this._drawer = c}
           drawerWidth={300}
           drawerPosition={DrawerLayoutAndroid.positions.Left}
-          renderNavigationView={() => <DrawerNavView navigator={this.props.navigator} sceneId={this.props.sceneId} toggleDrawer={this.toggleDrawer} drawerContent={[{title: 'Feed', sceneId: 'home'}, {title: 'Search', sceneId: 'search'}]} />}
+          renderNavigationView={() =>
+            <DrawerNavView
+              navigator={this.props.navigator}
+              sceneId={this.props.sceneId}
+              toggleDrawer={this.toggleDrawer}
+              drawerContent={routes}
+            />
+          }
         >
           {this.props.children}
         </DrawerLayoutAndroid>
