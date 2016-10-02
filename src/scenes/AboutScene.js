@@ -9,7 +9,7 @@ import DrawerNavLayout from '../components/DrawerNavLayout';
 export default class AboutScene extends Component {
   render() {
     return (
-      <DrawerNavLayout title="About" sceneId="about" navigator={this.props.navigator}>
+      <DrawerNavLayout firebaseIdeasRef={this.props.firebaseIdeasRef} title="About" sceneId="about" navigator={this.props.navigator}>
       <View>
           <View style={{justifyContent: 'center', alignItems: 'center', paddingHorizontal: 15}}>
             <Text style={{fontSize: 24, fontWeight: '400', color: 'black', paddingVertical: 20}}>The Developers{"\n"}</Text>

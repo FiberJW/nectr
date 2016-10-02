@@ -37,11 +37,11 @@ const Router = {
       },
     };
   },
-  getAboutRoute() {
+  getAboutRoute(firebaseIdeasRef) {
     return {
       id: 'about',
       renderScene(navigator) {
-        return <AboutScene navigator={navigator} />;
+        return <AboutScene navigator={navigator} firebaseIdeasRef={firebaseIdeasRef} />;
       },
       configureScene() {
         return {

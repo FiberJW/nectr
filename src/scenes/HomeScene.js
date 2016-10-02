@@ -20,7 +20,6 @@ export default class HomeScene extends Component {
 componentWillMount() {
    const self = this;
    this.props.firebaseIdeasRef.on("value", function(snapshot) {
-     console.log(snapshot.val());
      const data = Object.keys(snapshot.val()).map(key => {
        const idea = snapshot.val()[key];
        return {
@@ -30,9 +29,12 @@ componentWillMount() {
      }).reverse();
      self.setState({ data });
    }, function (errorObject) {
-     console.log("The read failed: " + errorObject.code);
    });
  }
+ componentWillUnmount() {
+    const self = this;
+    this.props.firebaseIdeasRef.off("value");
+  }
   toggleModal = () => {
     this.setState({ modalOpen: !this.state.modalOpen });
   }

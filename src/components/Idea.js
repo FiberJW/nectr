@@ -71,17 +71,15 @@ export default class Idea extends Component {
   onHeartPress = () => {
     this.props.firebaseIdeasRef.child(this.props.ideaKey).update({ liked: !this.state.liked });
   }
-  componentWillMount = () => {
+  componentDidMount = () => {
     const self = this;
     this.props.firebaseIdeasRef.child(this.props.ideaKey).on("value", function(snapshot) {
       self.setState({ liked: snapshot.val().liked });
     }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
     });
     this.setState({ liked: this.props.ideaData.liked });
   }
   render() {
-    console.log(this.props.ideaData.content);
     return (
         <View style={styles.container} elevation={4}>
           <View style={styles.contentContainer}>

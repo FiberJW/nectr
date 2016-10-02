@@ -13,7 +13,6 @@ export default class Feed extends Component {
     super(props);
   }
   render() {
-    console.log(this.props.data);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <ListView
