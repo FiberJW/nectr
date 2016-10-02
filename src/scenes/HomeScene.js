@@ -7,7 +7,7 @@ export default class HomeScene extends Component {
   render() {
     return (
       <DrawerNavLayout navigator={this.props.navigator} title="Feed" sceneId="home">
-        <Feed />
+        <Feed navigator={this.props.navigator} />
       </DrawerNavLayout>
     );
   }

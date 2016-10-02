@@ -13,6 +13,7 @@ import {
   HomeScene,
   SearchScene,
   AboutScene,
+  IdeaScene,
 } from 'scenes';
 import Transitions from '../lib/transitions';
 
@@ -59,6 +60,19 @@ const Router = {
       id: 'about',
       renderScene(navigator) {
         return <AboutScene navigator={navigator} />;
+      },
+            configureScene() {
+        return {
+          ...Transitions.NONE,
+        };
+      },
+    };
+  },
+  getIdeaRoute(idea) {
+    return {
+      id: 'idea',
+      renderScene(navigator) {
+        return <IdeaScene idea={idea} navigator={navigator} />;
       },
             configureScene() {
         return {
