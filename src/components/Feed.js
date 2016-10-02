@@ -5,7 +5,7 @@ import Idea from '../components/Idea';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    paddingTop: 20,
   },
   seperator: {
 
