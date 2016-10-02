@@ -5,9 +5,7 @@ import DrawerNavLayout from '../components/DrawerNavLayout';
 export default class HomeScene extends Component {
   render() {
     return (
-      <DrawerNavLayout title="Feed" sceneId="feed">
-        
-      </DrawerNavLayout>
+      <DrawerNavLayout navigator={this.props.navigator} title="Feed" sceneId="home" />
     );
   }
 }

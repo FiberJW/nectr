@@ -3,11 +3,17 @@
  */
 
 import React from 'react';
+import {
+  Platform,
+  Navigator,
+} from 'react-native';
 
 import {
   SplashScene,
   HomeScene,
+  SearchScene,
 } from 'scenes';
+import Transitions from '../lib/transitions';
 
 const Router = {
   getSplashRoute() {
@@ -25,10 +31,28 @@ const Router = {
     return {
       id: 'home',
       renderScene(navigator) {
-        return <HomeScene navigator={navigator} />
-      }
-    }
-  }
+        return <HomeScene navigator={navigator} />;
+      },
+      configureScene() {
+        return {
+          ...Transitions.NONE,
+        };
+      },
+    };
+  },
+  getSearchRoute() {
+    return {
+      id: 'search',
+      renderScene(navigator) {
+        return <SearchScene navigator={navigator} />;
+      },
+      configureScene() {
+        return {
+          ...Transitions.NONE,
+        };
+      },
+    };
+  },
 };
 
 export default Router;

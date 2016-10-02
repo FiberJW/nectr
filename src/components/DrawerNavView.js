@@ -10,7 +10,7 @@ export default class DrawerNavView extends Component {
     return (
       <ScrollView>
         {
-          this.props.drawerContent.map((data, i) => <DrawerItem parentSceneId={this.props.sceneId} key={i} {...data} />)
+          this.props.drawerContent.map((data, i) => <DrawerItem toggleDrawer={this.props.toggleDrawer} navigator={this.props.navigator} parentSceneId={this.props.sceneId} key={i} {...data} />)
         }
       </ScrollView>
     )

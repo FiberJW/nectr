@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+
+import Router from '../routes';
+import helpers from '../lib/helpers';
 
 const styles = StyleSheet.create({
   drawerItem: {
@@ -21,8 +24,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (props) => (
-  <TouchableOpacity style={[styles.drawerItem, props.parentSceneId === props.sceneId ? styles.active : null]}>
-    <Text style={[styles.drawerText]}>{props.title}</Text>
-  </TouchableOpacity>
-)
+export default class DrawerItem extends Component {
+  onPress = () => {
+    this.props.toggleDrawer();
+    setTimeout(() => {
+      this.props.navigator.push(helpers.getRouteById(this.props.sceneId)());
+    }, 50);
+  }
+  render() {
+    return (
+      <TouchableOpacity
+        style={[styles.drawerItem, this.props.parentSceneId === this.props.sceneId ? styles.active : null]}
+        onPress={this.onPress}
+      >
+        <Text style={[styles.drawerText]}>{this.props.title}</Text>
+      </TouchableOpacity>
+    );
+  }
+}

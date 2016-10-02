@@ -28,7 +28,7 @@ export default class HomeScene extends Component {
       drawerOpen: false,
     };
   }
-  onMenuClick = () => {
+  toggleDrawer = () => {
     this.setState({ drawerOpen: !this.state.drawerOpen });
     this.state.drawerOpen ? this._drawer.closeDrawer() : this._drawer.openDrawer();
   }
@@ -47,7 +47,7 @@ export default class HomeScene extends Component {
           title={this.props.title}
           elevation={5}
           titleColor="#ffffff"
-          onIconClicked={this.onMenuClick}
+          onIconClicked={this.toggleDrawer}
           style={styles.toolbar}
           // actions={[{title: '', show: 'always'}]}
           onActionSelected={this.onActionSelected} />
@@ -55,7 +55,7 @@ export default class HomeScene extends Component {
           ref={(c) => this._drawer = c}
           drawerWidth={300}
           drawerPosition={DrawerLayoutAndroid.positions.Left}
-          renderNavigationView={() => <DrawerNavView sceneId={this.props.sceneId} drawerContent={[{title: 'Feed', sceneId: 'feed'}, {title: 'Search', sceneId: 'search'}, {title: 'Your Ideas', sceneId: 'your_ideas'}]} />}
+          renderNavigationView={() => <DrawerNavView navigator={this.props.navigator} sceneId={this.props.sceneId} toggleDrawer={this.toggleDrawer} drawerContent={[{title: 'Feed', sceneId: 'home'}, {title: 'Search', sceneId: 'search'}]} />}
         >
           {this.props.children}
         </DrawerLayoutAndroid>
