@@ -51,7 +51,7 @@ export default class HomeScene extends Component {
         <ToolbarAndroid
           navIcon={require('nectr/src/images/menu_icon.png')}
           title={this.props.title}
-          elevation={5}
+          elevation={6}
           titleColor="#ffffff"
           onIconClicked={this.toggleDrawer}
           style={styles.toolbar}
