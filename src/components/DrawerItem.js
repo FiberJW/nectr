@@ -28,8 +28,8 @@ export default class DrawerItem extends Component {
   onPress = () => {
     this.props.toggleDrawer();
     setTimeout(() => {
-      this.props.navigator.push(helpers.getRouteById(this.props.sceneId)());
-    }, 50);
+      this.props.navigator.replace(helpers.getRouteById(this.props.sceneId)());
+    }, 150);
   }
   render() {
     return (

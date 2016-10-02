@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 
 import {
   View,
+  Text,
   StatusBar,
   ToolbarAndroid,
   TextInput,
   Dimensions,
   StyleSheet,
+  Picker,
 } from 'react-native';
 
 import colors from '../config/colors';
@@ -24,8 +26,8 @@ export default class CreateIdeaScene extends Component {
     super();
 
     this.state = {
-      ideaContent: '',
-      ideaTags: [],
+      ideaContent: 'What\'s your big idea?',
+      ideaCategory: 'tech',
       ideaLocation: '',
     };
   }
@@ -53,19 +55,31 @@ export default class CreateIdeaScene extends Component {
           }}
           returnKeyType="done"
           style={{
-            height: Dimensions.get('window').width,
+            height: Dimensions.get('window').width - 60,
             // borderColor: 'gray',
             fontSize: 36,
             // borderWidth: 1,
           }}
           multiline
           maxLength={140}
-          onChangeText={(ideaContent) => this.setState({ideaContent})}
+          onChangeText={ideaContent => this.setState({ ideaContent })}
           value={this.state.ideaContent}
+          autoCorrect={false}
         />
-        {/* Category dropdown overlay */}
+        <Text>Category:</Text>
+        <Picker
+          prompt="hi"
+          selectedValue={this.state.ideaCategory}
+          mode="dropdown"
+          onValueChange={(ideaCategory) => this.setState({ ideaCategory })}
+        >
+          <Picker.Item label="Tech" value="tech" />
+          <Picker.Item label="Healthcare" value="healthcare" />
+          <Picker.Item label="Community" value="community" />
+          <Picker.Item label="Environmental" value="environmental" />
+          <Picker.Item label="Social" value="social" />
+        </Picker>
       </View>
-
     )
   }
 }

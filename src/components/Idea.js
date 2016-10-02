@@ -62,49 +62,50 @@ export default class Idea extends Component {
     this.props.navigator.push(router.getIdeaRoute(this.props.ideaData))
   }
   render() {
-    return ( 
-      <TouchableOpacity onPress={this.onPress}>   
-         <View style={styles.container} elevation={6}>
-        <View style={styles.contentContainer}>
-          <Image
-            source={{ uri: this.props.profileImageUrl }}
-            style={styles.profileImage}
-          />
-          <View style={styles.textContainer}>
-            <View style={styles.meta}>
-              <Text style={styles.author}>
-                {this.props.author}
-              </Text>
-              <Text style={styles.timeCreated}>
-                {this.props.timeCreated}
+    return (
+      <TouchableOpacity onPress={this.onPress}>
+        <View style={styles.container} elevation={6}>
+          <View style={styles.contentContainer}>
+            <Image
+              source={{ uri: this.props.profileImageUrl }}
+              style={styles.profileImage}
+            />
+            <View style={styles.textContainer}>
+              <View style={styles.meta}>
+                <Text style={styles.author}>
+                  {this.props.author}
+                </Text>
+                <Text style={styles.timeCreated}>
+                  {this.props.timeCreated}
+                </Text>
+              </View>
+              <Text style={styles.content}>
+                {`${this.props.content.substr(0, 80)}${this.props.content.length > 80 ? '...' : ''}`}
               </Text>
             </View>
-            <Text style={styles.content}>
-              {`${this.props.content.substr(0, 80)}${this.props.content.length > 80 ? '...' : ''}`}
-            </Text>
+          </View>
+          <View style={styles.actionRow}>
+            <TouchableOpacity>
+              <Image
+                style={{
+                  height: 28,
+                  width: 28,
+                }}
+                source={require('nectr/src/images/reply_icon.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={{
+                  height: 24,
+                  width: 24,
+                }}
+                source={require('nectr/src/images/favorite_icon_border.png')}
+              />
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.actionRow}>
-          <TouchableOpacity>
-            <Image
-              style={{
-                height: 28,
-                width: 28,
-              }}
-              source={require('nectr/src/images/reply_icon.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={{
-                height: 24,
-                width: 24,
-              }}
-              source={require('nectr/src/images/favorite_icon_border.png')}
-            />
-          </TouchableOpacity>
-        </View>
-      </View></TouchableOpacity>
+      </TouchableOpacity>
     )
   }
 }

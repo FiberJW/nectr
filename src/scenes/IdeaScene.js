@@ -29,30 +29,30 @@ export default class IdeaScene extends Component {
       {title: 'About', sceneId: 'about'},
     ];
     return (
-    <View 
+    <View
 	  	style={{
 	  	  flex:1,
-	  	//  marginTop: 22,
-	  	 paddingTop: StatusBar.currentHeight,
-          backgroundColor: '#F5F5F5',
-	  	 //flexDirection: "row"
-  	}}
+        //  marginTop: 22,
+        paddingTop: StatusBar.currentHeight,
+        backgroundColor: '#F5F5F5',
+        //flexDirection: "row"
+      }}
     >
-        <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
-                <ToolbarAndroid
-          navIcon={require('nectr/src/images/menu_icon.png')}
+      <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
+      <ToolbarAndroid
+        navIcon={require('nectr/src/images/arrow_back_icon_white.png')}
           title={this.props.title}
           elevation={6}
           titleColor="#ffffff"
           onIconClicked={() => this.props.navigator.pop()}
           style={styles.toolbar}
         />
-        <View 
+        <View
         	style={{
         		flex:2,
         }}
         >
-        <Image 
+        <Image
       	    style={{width:100, height:100}}
       		source={{uri: this.props.idea.profileImageUrl}}
       	/>
