@@ -8,8 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 
-import colors from '../config/colors.js';
-
+import colors from '../config/colors';
+import Feed   from '../components/Feed';
 const styles = StyleSheet.create({
   toolbar: {
     backgroundColor: colors.primaryBlue,
@@ -42,6 +42,7 @@ export default class HomeScene extends Component {
           style={styles.toolbar}
           // actions={[{title: '', show: 'always'}]}
           onActionSelected={this.onActionSelected} />
+           <Feed />
       </View>
     )
   }
