@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontSize: 24,
     color: 'black',
+    width: Dimensions.get('window').width - 175,
     flexWrap: 'wrap',
   },
   textContainer: {
@@ -100,6 +101,7 @@ export default class Idea extends Component {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
+                  flexWrap: 'wrap',
                   justifyContent: 'space-between',
                 }}
               >
