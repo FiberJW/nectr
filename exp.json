@@ -1,0 +1,22 @@
+{
+  "name": "Nectr",
+  "description": "An anonymous global chatboard",
+  "slug": "nectr",
+  "sdkVersion": "11.0.0",
+  "version": "0.0.1",
+  "orientation": "portrait",
+  "primaryColor": "#cccccc",
+  "iconUrl": "http://i.imgur.com/hXt1KXM.png",
+  "notification": {
+    "iconUrl": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
+    "color": "#000000"
+  },
+  "loading": {
+    "iconUrl": "https://i.imgur.com/B9jQ1r3.png",
+    "backgroundColor": "#298CEC",
+    "hideExponentText": true
+  },
+  "packagerOpts": {
+    "assetExts": ["ttf", "mp4"]
+  }
+}

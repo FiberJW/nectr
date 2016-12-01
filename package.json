@@ -1,22 +1,20 @@
 {
   "name": "nectr",
-  "version": "0.0.1",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
   "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
-  },
+  "main": "main.js",
   "dependencies": {
+    "react-native-action-button": "2.0.15",
+    "react-native-prompt": "^1.0.0",
     "@exponent/react-native-navigator": "^0.4.8",
+    "@exponent/vector-icons": "~2.0.3",
+    "chalkdust": "^1.1.0",
+    "exponent": "~11.0.2",
     "firebase": "^3.4.1",
     "moment": "^2.15.1",
-    "react": "15.3.2",
-    "react-native": "0.34.1"
-  },
-  "devDependencies": {
-    "eslint": "^3.7.0",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.0",
-    "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0"
+    "react": "~15.3.2",
+    "react-native": "git+https://github.com/exponentjs/react-native#sdk-11.0.3"
   }
 }

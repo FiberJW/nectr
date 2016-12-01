@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BackAndroid } from 'react-native';
 import * as firebase from 'firebase';
-
+import { Components } from 'exponent';
 import ExNavigator from '@exponent/react-native-navigator';
 import Router from './routes';
 
@@ -13,12 +13,32 @@ const firebaseConfig = {
   messagingSenderId: '877832805633',
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
+firebase.initializeApp(firebaseConfig);
 const rootRef = firebase.database().ref();
 const ideasRef = rootRef.child('ideas');
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+      data: [],
+    };
+  }
+
+  componentWillMount() {
+    ideasRef.on('value', (snapshot) => {
+      const data = Object.keys(snapshot.val()).map(key => {
+        const idea = snapshot.val()[key];
+        return {
+          idea,
+          key,
+        };
+      }).reverse();
+      this.setState({ data, isReady: true });
+    }, () => {});
+  }
+
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', () => {
       if (this.navigator && this.navigator.getCurrentRoutes().length > 2) {
@@ -31,17 +51,21 @@ export default class App extends Component {
   }
 
   componentWillUnmount() {
+    ideasRef.off('value');
     BackAndroid.exitApp();
   }
 
   render() {
+    if (!this.state.isReady) {
+      return <Components.AppLoading />;
+    }
+
     return (
       <ExNavigator
-        initialRoute={Router.getSplashRoute(ideasRef)}
+        initialRoute={ Router.getHomeRoute(ideasRef, this.state.data) }
         style={{ flex: 1 }}
-        showNavigationBar={false}
-        ref={(nav) => { this.navigator = nav; }}
-        style={{ flex: 1 }}
+        showNavigationBar={ false }
+        ref={ (nav) => { this.navigator = nav; } }
       />
     );
   }

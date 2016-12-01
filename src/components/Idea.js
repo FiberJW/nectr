@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   Image,
+  Platform,
   TouchableOpacity,
 } from 'react-native';
-
-import router from '../routes';
+import { Ionicons } from '@exponent/vector-icons';
 import moment from 'moment';
+import colors from '../config/colors';
+// import Router from '../routes';
 
 const styles = StyleSheet.create({
   container: {
@@ -62,6 +64,13 @@ const styles = StyleSheet.create({
 });
 
 export default class Idea extends Component {
+  static propTypes = {
+    ideaData: PropTypes.object,
+    ideaKey: PropTypes.string,
+    firebaseIdeasRef: PropTypes.object,
+    navigator: PropTypes.object,
+  };
+
   constructor() {
     super();
 
@@ -69,60 +78,67 @@ export default class Idea extends Component {
       liked: false,
     };
   }
+  componentWillMount = () => {
+    this.setState({ liked: this.props.ideaData.liked });
+    this.props.firebaseIdeasRef
+      .child(this.props.ideaKey)
+      .on('value', (snapshot) => {
+        this.setState({ liked: snapshot.val().liked });
+      }, () => {});
+  }
+
   onHeartPress = () => {
     this.props.firebaseIdeasRef.child(this.props.ideaKey).update({ liked: !this.state.liked });
   }
-  componentDidMount = () => {
-    const self = this;
-    this.props.firebaseIdeasRef.child(this.props.ideaKey).on("value", function(snapshot) {
-      self.setState({ liked: snapshot.val().liked });
-    }, function (errorObject) {
-    });
-    this.setState({ liked: this.props.ideaData.liked });
-  }
+
   render() {
     return (
-        <View style={styles.container} elevation={4}>
-          <View style={styles.contentContainer}>
-            <Image
-              source={{ uri: this.props.ideaData.profileImageUrl }}
-              style={styles.profileImage}
-            />
-            <View style={styles.textContainer}>
-              <View style={styles.meta}>
-                <Text style={styles.author}>
-                  {this.props.ideaData.author}
-                </Text>
-                <Text style={styles.timeCreated}>
-                  {moment.utc(this.props.ideaData.createdAt).fromNow()}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                }}
+      <View
+        style={ styles.container }
+        elevation={ 5 }
+        shadowColor="#000000"
+        shadowOffset={{ width: 2, height: 2 }}
+        shadowOpacity={ 0.25 }
+        shadowRadius={ 4 }
+      >
+        <View style={ styles.contentContainer }>
+          <Image
+            source={{ uri: this.props.ideaData.profileImageUrl }}
+            style={ styles.profileImage }
+          />
+          <View style={ styles.textContainer }>
+            <View style={ styles.meta }>
+              <Text style={ styles.author }>
+                {this.props.ideaData.author}
+              </Text>
+              <Text style={ styles.timeCreated }>
+                {moment.utc(this.props.ideaData.createdAt).fromNow()}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={ styles.content }>
+                {this.props.ideaData.content.trim()}
+              </Text>
+              <TouchableOpacity
+                onPress={ this.onHeartPress }
               >
-                <Text style={styles.content}>
-                  {`${this.props.ideaData.content.substr(0, 80)}${this.props.ideaData.content.length > 80 ? '...' : ''}`}
-                </Text>
-                <TouchableOpacity
-                  onPress={this.onHeartPress}
-                >
-                  <Image
-                    style={{
-                      height: 24,
-                      width: 24,
-                    }}
-                    source={this.state.liked ? require('nectr/src/images/favorite_icon_solid.png') : require('nectr/src/images/favorite_icon_border.png')}
-                  />
-                </TouchableOpacity>
-              </View>
+                <Ionicons
+                  name={ `${Platform.OS === 'ios' ? 'ios' : 'md'}-heart${this.state.liked ? '' : '-outline'}` }
+                  size={ 24 }
+                  color={ this.state.liked ? colors.primaryBlue : colors.gray }
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
-    )
+      </View>
+    );
   }
 }
